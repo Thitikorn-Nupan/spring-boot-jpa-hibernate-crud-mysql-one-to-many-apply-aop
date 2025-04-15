@@ -10,21 +10,26 @@ import java.util.Optional;
 
 @Service
 public class AuthorService {
-    private AuthorRepo authorRepo;
+
+    private final AuthorRepo authorRepo;
 
     @Autowired
     public AuthorService(AuthorRepo authorRepo) {
         this.authorRepo = authorRepo;
     }
+
     public Iterable<Author> getAllAuthors() {
         return authorRepo.findAll();
     }
+
     public Optional<Author> getAuthorById(String aid) {
         return authorRepo.findById(aid);
     }
+
     public Optional<Author> saveAuthor(Author author) {
         return Optional.of(authorRepo.save(author));
     }
+
     // i'll catch this err by aop ** AfterThrowing()
     public Optional<Author> editAuthor(Author author, String aid)  throws RuntimeException {
         return Optional.ofNullable(authorRepo.findById(aid).map(searchAuthor -> {
@@ -34,5 +39,16 @@ public class AuthorService {
             return authorRepo.save(searchAuthor);
             // if not found will do orElseThrow(...) block
         }).orElseThrow(() -> new RuntimeException("May not found author id : " + aid)));
+    }
+
+    public Boolean deleteAuthor(String aid) {
+        Optional<Author> author = authorRepo.findById(aid);
+        if (author.isPresent()) {
+            if (author.get().getEditHistories().isEmpty()) {
+                authorRepo.delete(author.get());
+                return true;
+            }
+        }
+        return false;
     }
 }

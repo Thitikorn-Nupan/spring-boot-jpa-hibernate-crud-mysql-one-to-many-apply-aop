@@ -5,11 +5,12 @@ import jakarta.persistence.*;
 // import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
 // @AllArgsConstructor
-@NoArgsConstructor
+// @NoArgsConstructor
 @Entity
 @Table(name = "authors")
 @Data
@@ -22,8 +23,9 @@ public class Author {
     // Mapping to the other table
     @OneToMany(cascade = CascadeType.ALL) // ,targetEntity = Address.class ,mappedBy = "ob"
     @JoinColumn(name = "aid")
-    // ** not good for toString()
-    private List<EditHistory> editHistories;
+    private List<EditHistory> editHistories; // ** it's not good for toString()
+
+    public Author() {}
 
     @Override
     public String toString() {

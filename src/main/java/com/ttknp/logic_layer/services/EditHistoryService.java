@@ -9,11 +9,13 @@ import java.util.Optional;
 
 @Service
 public class EditHistoryService {
-    private EditHistoryRepo editHistoryRepo;
+    private final EditHistoryRepo editHistoryRepo;
+
     @Autowired
     public EditHistoryService(EditHistoryRepo editHistoryRepo) {
         this.editHistoryRepo = editHistoryRepo;
     }
+
     public Optional<EditHistory> createEditHistory(EditHistory editHistory) {
         return Optional.of(editHistoryRepo.save(editHistory));
     }

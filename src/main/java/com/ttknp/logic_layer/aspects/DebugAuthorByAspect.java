@@ -4,6 +4,7 @@ import com.ttknp.logic_layer.entities.Author;
 import com.ttknp.logic_layer.entities.EditHistory;
 import com.ttknp.logic_layer.services.AuthorService;
 import com.ttknp.logic_layer.services.EditHistoryService;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -17,11 +18,12 @@ import java.util.Optional;
 
 @Aspect
 @Component
+@Slf4j
 public class DebugAuthorByAspect {
 
-    private Logger log = LoggerFactory.getLogger(DebugAuthorByAspect.class);
-    private EditHistoryService editHistoryService;
-    private AuthorService authorService;
+    // private Logger log = LoggerFactory.getLogger(DebugAuthorByAspect.class);
+    private final EditHistoryService editHistoryService;
+    private final AuthorService authorService;
 
     @Autowired
     public DebugAuthorByAspect(EditHistoryService editHistoryService , AuthorService authorService) {
