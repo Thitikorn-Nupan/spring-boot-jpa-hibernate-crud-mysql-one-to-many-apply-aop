@@ -1,7 +1,6 @@
 import {EditHistories} from "./edit-history";
 
 export class Author {
-
   public aid: string
   public fullname: string
   public age: number
@@ -16,6 +15,4 @@ export class Author {
     this.alive = alive;
     this.editHistories = editHistories;
   }
-
-
 }
