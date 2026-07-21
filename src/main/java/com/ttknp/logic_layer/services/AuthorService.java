@@ -4,9 +4,7 @@ import com.ttknp.logic_layer.entities.Author;
 import com.ttknp.logic_layer.repositories.AuthorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
-
 
 @Service
 public class AuthorService {
@@ -32,7 +30,7 @@ public class AuthorService {
 
     // i'll catch this err by aop ** AfterThrowing()
     public Optional<Author> editAuthor(Author author, String aid)  throws RuntimeException {
-        return Optional.ofNullable(authorRepo.findById(aid).map(searchAuthor -> {
+        return Optional.of(authorRepo.findById(aid).map(searchAuthor -> {
             searchAuthor.setFullname(author.getFullname());
             searchAuthor.setAge(author.getAge());
             searchAuthor.setAlive(author.getAlive());

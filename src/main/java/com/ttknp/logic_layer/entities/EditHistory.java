@@ -2,9 +2,7 @@ package com.ttknp.logic_layer.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-// import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 // @AllArgsConstructor
 // @NoArgsConstructor
@@ -18,7 +16,7 @@ public class EditHistory {
     private String fullname;
     private Short age;
     private Boolean alive;
-    /*
+    /**
         The default strategy for @Column(name="TestName") will mapped test_name, this is correct behavior!
         If you have a column named TestName in your database you should change Column annotation to @Column(name="testname").
     */
@@ -30,4 +28,5 @@ public class EditHistory {
     private Author author;
 
     public EditHistory() {}
+
 }

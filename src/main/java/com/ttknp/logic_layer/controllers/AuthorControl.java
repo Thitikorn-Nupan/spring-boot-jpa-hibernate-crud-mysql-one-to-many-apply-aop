@@ -3,13 +3,9 @@ package com.ttknp.logic_layer.controllers;
 import com.ttknp.logic_layer.entities.Author;
 import com.ttknp.logic_layer.services.AuthorService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 // import java.time.Instant;
 @CrossOrigin(origins = "*", allowedHeaders = "*") // ** way to set allow all cross origins
@@ -31,6 +27,7 @@ public class AuthorControl {
                 .ok()
                 .body("hello world");
     }
+
     @GetMapping(value = "/reads")
     private ResponseEntity getAllAuthors() {
         return ResponseEntity
@@ -45,12 +42,9 @@ public class AuthorControl {
                 .body(authorService.getAuthorById(aid));
     }
 
-    /*
-    //  For Web App
-    */
+    /** For Web App */
     @PostMapping(value = "/create")
     private ResponseEntity saveAuthor(@RequestBody Author author) {
-        // log.debug("(saveAuthor) author : {}", author); // (saveAuthor) author : Author{aid='A003', fullname='Don Don', age=43, alive=false}
         return ResponseEntity.ok().body(authorService.saveAuthor(author));
     }
     @PutMapping(value = "/update")
@@ -58,7 +52,7 @@ public class AuthorControl {
         return ResponseEntity.status(202).body(authorService.editAuthor(author, aid));
     }
 
-    /*
+    /**
     // For Android App
     // In kotlin I found this way for passing params data to api and map it by @RequestParam
     // why I don't pass json
@@ -87,10 +81,7 @@ public class AuthorControl {
     /**  For Android App */
     @DeleteMapping(value = "/delete")
     private ResponseEntity removeAuthor(@RequestParam String aid) {
-        //return ResponseEntity.ok().body("Can't delete author "+aid+". Cause it has been more than one table");
         return ResponseEntity.ok().body(authorService.deleteAuthor(aid));
-
     }
-
 
 }
